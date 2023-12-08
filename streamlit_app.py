@@ -1,5 +1,8 @@
 import streamlit
+import pandas
+import requests
 import snowflake.connector
+from urllib.error import URLError
 #-----Lesson12
 streamlit.title('-------------------------------------')
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
@@ -8,14 +11,6 @@ my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 my_data_row = my_cur.fetchone()
 streamlit.text("Hello from Snowflake:")
 streamlit.text(my_data_row)
-#-----Lesson12+++
-
-add_my_fruit = streamlit.text_input('What fruit would you like to add to the list?','jackfruit')
-my_cur.execute("insert into fruit_load_list values('"+ add_my_fruit +"')")
-streamlit.write('thanks for adding ',add_my_fruit)
-
-#fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
-#streamlit.text(fruityvice_response.json())  #just writes data to screen
 
 #-----Lesson12++
 my_data_rows_all = my_cur.fetchall()
@@ -48,3 +43,14 @@ streamlit.text('🥑Kale, Spinach & Rocket Smoothie')
 streamlit.text('🍞🥣 Hard-Boiled Free-Range Egg')
 
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
+
+streamlit.stop();
+
+streamlit.header('🍌🥭 THIS SHOULD NOT RUN 🥝🍇')
+#-----Lesson12+++
+#add_my_fruit = streamlit.text_input('What fruit would you like to add to the list?','jackfruit')
+#my_cur.execute("insert into fruit_load_list values('"+ add_my_fruit +"')")
+#streamlit.write('thanks for adding ',add_my_fruit)
+
+#fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
+#streamlit.text(fruityvice_response.json())  #just writes data to screen
