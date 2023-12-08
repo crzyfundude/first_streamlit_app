@@ -13,10 +13,15 @@ my_cur.execute("select * from fruit_load_list")
 my_data_row = my_cur.fetchone()
 streamlit.text("The fruit load list contains:")
 streamlit.text(my_data_row)
+streamlit.header("The fruit load list contains:")
+streamlit.dataframe(my_data_row)
+
 #-----Lesson12++
 my_data_rows_all = my_cur.fetchall()
 streamlit.text("The fruit load list contains:")
 streamlit.text(my_data_rows_all)
+streamlit.header("The fruit load list contains:")
+streamlit.dataframe(my_data_rows_all)
 
 streamlit.title('-------------------------------------')
 streamlit.title('My Parents New Healthy Dinner- DUDE')
