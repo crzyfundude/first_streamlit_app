@@ -45,6 +45,21 @@ streamlit.text('🍞🥣 Hard-Boiled Free-Range Egg')
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 #create function
+streamlit.header('🍌🥭 FRUITY FUNCTION BUTTON 🥝🍇')
+def get_fruit_load_list():
+   with my_cnx.cursor() as my_cur:
+        my_cur.execute("select * from fruit_load_list")
+        return my_cur.fetchall()
+
+# add a button to load the fruit
+if streamlist.button('Get Fruit Load List'):
+   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+   my_data_rows = get_fruit_load_list()
+   streamlit.dataframe(my_data_rows)
+
+#======================================
+
+#create function
 def get_fruityvice_data(this_fruit_choice):
       fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ this_fruit_choice)
       fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
