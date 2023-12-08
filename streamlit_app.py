@@ -44,9 +44,22 @@ streamlit.text('🍞🥣 Hard-Boiled Free-Range Egg')
 
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
-streamlit.stop();
+
 
 streamlit.header('🍌🥭 THIS SHOULD NOT RUN 🥝🍇')
+   try:
+      fruit_choice = streamlit.text_input('What fruit woud you like information about?')
+      if not fruit_choice:
+            streamlit.error("please select a fruit to get information.")
+      else:
+            fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
+            fruitvice_normalized = pandas.json_normalize(fruityvice_response.json())
+            streamlit.dataframe(fruitvice_normalized)
+   except URLError as e:
+      streamlit.error()   
+
+
+streamlit.stop();
 #-----Lesson12+++
 #add_my_fruit = streamlit.text_input('What fruit would you like to add to the list?','jackfruit')
 #my_cur.execute("insert into fruit_load_list values('"+ add_my_fruit +"')")
